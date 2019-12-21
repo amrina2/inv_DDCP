@@ -24,12 +24,17 @@ n1=14; %(say)
 n2=int8(N/n1);
 d1=u(1:n2:N,1);
 n3=length(d1);
-d1= d1+sigma_d*rand(n3,1);
+d1= d1+sigma_d*rand(n3,1); % New data d1
 % Making all positive d1 
 d1(d1<0)=-d1(d1<0);
-x1=x_N(1:n2:N,1);
-plot(x1,d1,'*'); 
+x1=x_N(1:n2:N,1); 
 %%
-% Saving our new data set
-dlmwrite('dataNEW.txt','d1')
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Saving our new data set d1 as 'dataNEW.txt' file
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+fid = fopen('dataNEW.txt','wt');
+for ii = 1:size(d1,1)
+    fprintf(fid,'%20.18f \t',d1(ii,:));
+    fprintf(fid,'\n');
+end
+fclose(fid)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%END
